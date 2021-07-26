@@ -1,3 +1,5 @@
+export {};
+
 function logAndGetString(value: string) {
   console.log('return', value);
   return value;
