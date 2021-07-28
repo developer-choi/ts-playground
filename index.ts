@@ -1,8 +1,11 @@
-class Base {
-  static staticBaseField = 3;
-}
+class DeclaredClass {}
+const ExpressedClass = class {}
+function declaredFunction() {}
+const expressedFunction = function () {};
+const arrowFunction = () => {};
 
-class Derived extends Base {}
-
-console.log(Derived.staticBaseField);
-
+console.log(DeclaredClass.name); // 'DeclaredClass'
+console.log(ExpressedClass.name); // 'ExpressedClass'
+console.log(declaredFunction.name); // 'declaredFunction'
+console.log(expressedFunction.name); // 'expressedFunction'
+console.log(arrowFunction.name); // 'arrowFunction'
