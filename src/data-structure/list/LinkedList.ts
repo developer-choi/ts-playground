@@ -110,7 +110,7 @@ export class LinkedList<T> extends List<T> {
     return this;
   }
   
-  filter(predicate: (value: T, index: number, original: List<T>) => boolean): LinkedList<T> {
+  filter(predicate: (value: T, index: number, original: LinkedList<T>) => boolean): LinkedList<T> {
     const newInstance = new LinkedList<T>();
   
     this.forEach((value, index, original) => {
@@ -122,7 +122,7 @@ export class LinkedList<T> extends List<T> {
     return newInstance;
   }
   
-  some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
+  some(predicate: (value: T, index: number, original: LinkedList<T>) => boolean): boolean {
     let result = false;
     
     try {
@@ -143,24 +143,55 @@ export class LinkedList<T> extends List<T> {
     }
   }
   
-  find(predicate: (value: T, index: number, original: List<T>) => boolean): T | undefined {
-    let target: T | undefined;
+  findIndex(predicate: (value: T, index: number, original: LinkedList<T>) => boolean): number {
+    let targetIndex: number = -1;
   
     try {
       this.forEach(((value, index, original) => {
         if (predicate(value, index, original)) {
-          target = value;
+          targetIndex = index;
           throw Error('Ignore this');
         }
       }));
-      return target;
+      return targetIndex;
+    
+    } catch (error) {
+      return targetIndex;
+    }
+  }
+  
+  get(index: number): T | undefined {
+    if(this.length < index + 1) {
+      return undefined;
+    }
+  
+    let target: T | undefined;
+    
+    try {
+      this.forEach((value, listIndex) => {
+        if (index === listIndex) {
+          target = value;
+          throw Error('Ignore this error.');
+        }
+      });
+      return undefined;
       
     } catch (error) {
       return target;
     }
   }
   
-  every(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
+  find(predicate: (value: T, index: number, original: LinkedList<T>) => boolean): T | undefined {
+    const targetIndex = this.findIndex(predicate);
+  
+    if (targetIndex === -1) {
+      return undefined;
+    } else {
+      return this.get(targetIndex);
+    }
+  }
+  
+  every(predicate: (value: T, index: number, original: LinkedList<T>) => boolean): boolean {
     let result = true;
   
     try {

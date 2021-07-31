@@ -12,4 +12,5 @@ array.push(8);
 array.push(9);
 array.push(10);
 
-console.log(array.find(value => value === 2));
+console.log(array.findIndex(value => value === 2));
+console.log(array.get(2));

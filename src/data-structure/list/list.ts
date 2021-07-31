@@ -35,5 +35,7 @@ export abstract class List<T> extends Collection<T> implements Iterable<T> {
   abstract some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean;
   abstract every(predicate: (value: T, index: number, original: List<T>) => boolean): boolean;
   abstract find(predicate: (value: T, index: number, original: List<T>) => boolean): T | undefined;
+  abstract findIndex(predicate: (value: T, index: number, original: List<T>) => boolean): number;
   abstract fill(value: T, fromIndex?: number, toIndex?: number): this;
+  abstract get(index: number): T | undefined;
 }
