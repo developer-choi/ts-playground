@@ -67,6 +67,11 @@ export class LinkedList<T> extends List<T> {
     return newInstance;
   }
   
+  /** TODO
+   * Based on the code implemented,
+   * I think the code will be the same even if the implementation is an ArrayList, not a LinkedList.
+   * How do we solve this code duplication?
+   */
   slice(fromIndex = 0, toIndex = this.length): LinkedList<T> {
     const _fromIndex = fromIndex >= 0 ? fromIndex : this.length + fromIndex;
     const _toIndex = toIndex >= 0 ? toIndex : this.length + toIndex;
@@ -83,6 +88,26 @@ export class LinkedList<T> extends List<T> {
     });
     
     return newInstance;
+  }
+  
+  fill(value: T, fromIndex = 0, toIndex = this.length): this {
+    //TODO These two lines have duplicate code with slice().
+    const _fromIndex = fromIndex >= 0 ? fromIndex : this.length + fromIndex;
+    const _toIndex = toIndex >= 0 ? toIndex : this.length + toIndex;
+    
+    let node = this.head;
+    let index = 0;
+    
+    while (node !== null) {
+      if (_fromIndex <= index && index < _toIndex) {
+        node.data = value;
+      }
+  
+      node = node.next;
+      index++;
+    }
+    
+    return this;
   }
   
   filter(predicate: (value: T, index: number, original: List<T>) => boolean): LinkedList<T> {
