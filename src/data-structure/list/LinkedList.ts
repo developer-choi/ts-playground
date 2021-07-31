@@ -143,6 +143,23 @@ export class LinkedList<T> extends List<T> {
     }
   }
   
+  find(predicate: (value: T, index: number, original: List<T>) => boolean): T | undefined {
+    let target: T | undefined;
+  
+    try {
+      this.forEach(((value, index, original) => {
+        if (predicate(value, index, original)) {
+          target = value;
+          throw Error('Ignore this');
+        }
+      }));
+      return target;
+      
+    } catch (error) {
+      return target;
+    }
+  }
+  
   every(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
     let result = true;
   
