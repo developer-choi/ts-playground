@@ -1,8 +1,8 @@
 import {List} from './list';
 
 export class LinkedList<T> extends List<T> {
-  head: Node<T> | null = null;
-  tail: Node<T> | null = null;
+  private head: Node<T> | null = null;
+  private tail: Node<T> | null = null;
   
   push(item: T): number {
     if (this.head === null && this.tail === null) {
@@ -25,14 +25,46 @@ export class LinkedList<T> extends List<T> {
   
   toArray(): T[] {
     const array = [] as T[];
-    let node = this.head;
   
+    this.forEach(item => {
+      array.push(item);
+    });
+    
+    return array;
+  }
+  
+  forEach(callback: (item: T, index: number, original: LinkedList<T>) => void): void {
+    let node = this.head;
+    let index = 0;
+    
     while (node !== null) {
-      array.push(node.data);
+      callback(node.data, index, this);
+      index++;
       node = node.next;
     }
+  }
+  concat(list: LinkedList<T>): LinkedList<T> {
+    const newInstance = new LinkedList<T>();
+    
+    this.forEach(item => {
+      newInstance.push(item);
+    });
   
-    return array;
+    list.forEach(item => {
+      newInstance.push(item);
+    });
+  
+    return newInstance;
+  }
+  
+  map<R>(callback: (item: T, index: number, original: LinkedList<T>) => R): LinkedList<R> {
+    const newInstance = new LinkedList<R>();
+  
+    this.forEach((item, index, original) => {
+      newInstance.push(callback(item, index, original));
+    });
+  
+    return newInstance;
   }
 }
 

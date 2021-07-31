@@ -1,13 +1,13 @@
 import {Collection} from '../collection';
 
 export interface Iterable<T> {
-  forEach: (callback: (item: T, index: number, original: List<T>) => void) => void;
-  concat: (...item: T[]) => List<T>;
-  map: <R>(callback: (item: T, index: number, original: List<T>) => R) => List<R>;
+  forEach(callback: (item: T, index: number, original: List<T>) => void): void;
+  concat(list: List<T>): List<T>;
+  map<R>(callback: (item: T, index: number, original: List<T>) => R): List<R>;
 }
 
 // What's the List? Umm...
-export abstract class List<T> extends Collection<T> {
+export abstract class List<T> extends Collection<T> implements Iterable<T> {
   /**
    * The length property can be read outside.
    * And that must not be written outside.
@@ -27,4 +27,8 @@ export abstract class List<T> extends Collection<T> {
   abstract push(item: T): number;
   
   abstract toArray(): T[];
+  
+  abstract forEach(callback: (item: T, index: number, original: List<T>) => void): void;
+  abstract map<R>(callback: (item: T, index: number, original: List<T>) => R): List<R>;
+  abstract concat(list: List<T>): List<T>;
 }
