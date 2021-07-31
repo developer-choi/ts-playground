@@ -8,4 +8,4 @@ numberList.push(4);
 numberList.push(5);
 numberList.push(6);
 
-console.log(numberList.filter(value => value % 2 === 0).toArray());
+console.log(numberList.some(value => value > 3));

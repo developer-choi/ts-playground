@@ -96,6 +96,29 @@ export class LinkedList<T> extends List<T> {
   
     return newInstance;
   }
+  
+  some(callback: (item: T, index: number, original: List<T>) => boolean): boolean {
+    let result: boolean = false;
+    
+    try {
+      this.forEach((item, index, original) => {
+        console.log('iterate', index);
+        
+        if (callback(item, index, original)) {
+          result = true;
+          throw Error('Ignore this error.');
+        }
+      });
+  
+      return false;
+    } catch (error) {
+      if (result) {
+        return true;
+      } else {
+        throw error;
+      }
+    }
+  }
 }
 
 class Node<T> {
