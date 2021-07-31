@@ -4,16 +4,16 @@ export class LinkedList<T> extends List<T> {
   private head: Node<T> | null = null;
   private tail: Node<T> | null = null;
   
-  push(item: T): number {
+  push(value: T): number {
     if (this.head === null && this.tail === null) {
-      this.head = new Node(item);
+      this.head = new Node(value);
       this.tail = this.head;
       this._length++;
       return this._length;
     }
   
     if(this.head !== null && this.tail !== null) {
-      const node = new Node(item, this.tail);
+      const node = new Node(value, this.tail);
       this.tail.next = node;
       this.tail = node;
       this._length++;
@@ -26,19 +26,19 @@ export class LinkedList<T> extends List<T> {
   toArray(): T[] {
     const array = [] as T[];
   
-    this.forEach(item => {
-      array.push(item);
+    this.forEach(value => {
+      array.push(value);
     });
     
     return array;
   }
   
-  forEach(callback: (item: T, index: number, original: LinkedList<T>) => void): void {
+  forEach(predicate: (value: T, index: number, original: LinkedList<T>) => void): void {
     let node = this.head;
     let index = 0;
     
     while (node !== null) {
-      callback(node.data, index, this);
+      predicate(node.data, index, this);
       index++;
       node = node.next;
     }
@@ -46,22 +46,22 @@ export class LinkedList<T> extends List<T> {
   concat(list: LinkedList<T>): LinkedList<T> {
     const newInstance = new LinkedList<T>();
     
-    this.forEach(item => {
-      newInstance.push(item);
+    this.forEach(value => {
+      newInstance.push(value);
     });
   
-    list.forEach(item => {
-      newInstance.push(item);
+    list.forEach(value => {
+      newInstance.push(value);
     });
   
     return newInstance;
   }
   
-  map<R>(callback: (item: T, index: number, original: LinkedList<T>) => R): LinkedList<R> {
+  map<R>(predicate: (value: T, index: number, original: LinkedList<T>) => R): LinkedList<R> {
     const newInstance = new LinkedList<R>();
   
-    this.forEach((item, index, original) => {
-      newInstance.push(callback(item, index, original));
+    this.forEach((value, index, original) => {
+      newInstance.push(predicate(value, index, original));
     });
   
     return newInstance;
@@ -76,35 +76,35 @@ export class LinkedList<T> extends List<T> {
       return newInstance;
     }
     
-    this.forEach((item, index) => {
+    this.forEach((value, index) => {
       if(_fromIndex <= index && index < _toIndex) {
-        newInstance.push(item);
+        newInstance.push(value);
       }
     });
     
     return newInstance;
   }
   
-  filter(callback: (item: T, index: number, original: List<T>) => boolean): LinkedList<T> {
+  filter(predicate: (value: T, index: number, original: List<T>) => boolean): LinkedList<T> {
     const newInstance = new LinkedList<T>();
   
-    this.forEach((item, index, original) => {
-      if (callback(item, index, original)) {
-        newInstance.push(item);
+    this.forEach((value, index, original) => {
+      if (predicate(value, index, original)) {
+        newInstance.push(value);
       }
     });
   
     return newInstance;
   }
   
-  some(callback: (item: T, index: number, original: List<T>) => boolean): boolean {
+  some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
     let result: boolean = false;
     
     try {
-      this.forEach((item, index, original) => {
+      this.forEach((value, index, original) => {
         console.log('iterate', index);
         
-        if (callback(item, index, original)) {
+        if (predicate(value, index, original)) {
           result = true;
           throw Error('Ignore this error.');
         }

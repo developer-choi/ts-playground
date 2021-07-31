@@ -1,7 +1,7 @@
 import {Collection} from '../collection';
 
 export interface Iterable<T> {
-  forEach(callback: (item: T, index: number, original: List<T>) => void): void;
+  forEach(callback: (value: T, index: number, original: List<T>) => void): void;
 }
 
 // What's the List? Umm...
@@ -22,15 +22,15 @@ export abstract class List<T> extends Collection<T> implements Iterable<T> {
     return this._length;
   }
   
-  abstract push(item: T): number;
+  abstract push(value: T): number;
   
   abstract toArray(): T[];
   
-  abstract forEach(callback: (item: T, index: number, original: List<T>) => void): void;
-  abstract map<R>(callback: (item: T, index: number, original: List<T>) => R): List<R>;
+  abstract forEach(predicate: (value: T, index: number, original: List<T>) => void): void;
+  abstract map<R>(predicate: (value: T, index: number, original: List<T>) => R): List<R>;
   abstract concat(list: List<T>): List<T>;
   
   abstract slice(fromIndex?: number, toIndex?: number): List<T>;
-  abstract filter(callback: (item: T, index: number, original: List<T>) => boolean): List<T>;
-  abstract some(callback: (item: T, index: number, original: List<T>) => boolean): boolean;
+  abstract filter(predicate: (value: T, index: number, original: List<T>) => boolean): List<T>;
+  abstract some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean;
 }
