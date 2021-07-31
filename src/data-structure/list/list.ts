@@ -33,4 +33,5 @@ export abstract class List<T> extends Collection<T> implements Iterable<T> {
   abstract slice(fromIndex?: number, toIndex?: number): List<T>;
   abstract filter(predicate: (value: T, index: number, original: List<T>) => boolean): List<T>;
   abstract some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean;
+  abstract every(predicate: (value: T, index: number, original: List<T>) => boolean): boolean;
 }

@@ -98,12 +98,10 @@ export class LinkedList<T> extends List<T> {
   }
   
   some(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
-    let result: boolean = false;
+    let result = false;
     
     try {
       this.forEach((value, index, original) => {
-        console.log('iterate', index);
-        
         if (predicate(value, index, original)) {
           result = true;
           throw Error('Ignore this error.');
@@ -116,6 +114,27 @@ export class LinkedList<T> extends List<T> {
         return true;
       } else {
         throw error;
+      }
+    }
+  }
+  
+  every(predicate: (value: T, index: number, original: List<T>) => boolean): boolean {
+    let result = true;
+  
+    try {
+      this.forEach((value, index, original) => {
+        if (!predicate(value, index, original)) {
+          result = false;
+          throw Error('Ignore this error.');
+        }
+      });
+      return true;
+      
+    } catch (error) {
+      if (result) {
+        throw error;
+      } else {
+        return false;
       }
     }
   }
