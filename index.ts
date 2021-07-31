@@ -1,36 +1,19 @@
 import {LinkedList} from './src/data-structure/list/LinkedList';
 
-/*******************************************/
-
-const englishList = new LinkedList<string>();
-const koreanList = new LinkedList<string>();
-
-englishList.push('Apple');
-englishList.push('Banana');
-
-koreanList.push('사과');
-koreanList.push('바나나');
-
-const conactList = koreanList.concat(englishList);
-console.log(koreanList.toArray());
-console.log(englishList.toArray());
-console.log(conactList.toArray());
-console.log(koreanList === conactList);
-console.log(englishList === conactList);
-console.log(conactList.length, koreanList.length, englishList.length);
-
-/*********************************************/
-
 const numberList = new LinkedList<number>();
 numberList.push(1);
 numberList.push(2);
 numberList.push(3);
 numberList.push(4);
-numberList.forEach(value => {
-  console.log(value);
-});
+numberList.push(5);
+numberList.push(6);
 
-const doubleList = numberList.map(value => value * 2);
-console.log(doubleList.toArray());
-console.log(doubleList === numberList);
-console.log(doubleList.length, numberList.length);
+console.log(numberList.slice() === numberList);
+console.log(numberList.slice().toArray());
+console.log(numberList.slice(0, 6).toArray());
+console.log(numberList.slice(1, 6).toArray());
+console.log(numberList.slice(5, 6).toArray());
+console.log(numberList.slice(7, 1).toArray());
+console.log(numberList.slice(2).toArray());
+console.log(numberList.slice(-2).toArray());
+console.log(numberList.slice(-4, -2).toArray());

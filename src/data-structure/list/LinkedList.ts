@@ -66,6 +66,24 @@ export class LinkedList<T> extends List<T> {
   
     return newInstance;
   }
+  
+  slice(fromIndex = 0, toIndex = this.length): LinkedList<T> {
+    const _fromIndex = fromIndex >= 0 ? fromIndex : this.length + fromIndex;
+    const _toIndex = toIndex >= 0 ? toIndex : this.length + toIndex;
+    const newInstance = new LinkedList<T>();
+    
+    if (_fromIndex > this.length || _toIndex < 0) {
+      return newInstance;
+    }
+    
+    this.forEach((item, index) => {
+      if(_fromIndex <= index && index < _toIndex) {
+        newInstance.push(item);
+      }
+    });
+    
+    return newInstance;
+  }
 }
 
 class Node<T> {
