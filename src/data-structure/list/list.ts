@@ -31,4 +31,5 @@ export abstract class List<T> extends Collection<T> implements Iterable<T> {
   abstract concat(list: List<T>): List<T>;
   
   abstract slice(fromIndex?: number, toIndex?: number): List<T>;
+  abstract filter(callback: (item: T, index: number, original: List<T>) => boolean): List<T>;
 }

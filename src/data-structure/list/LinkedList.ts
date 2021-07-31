@@ -84,6 +84,18 @@ export class LinkedList<T> extends List<T> {
     
     return newInstance;
   }
+  
+  filter(callback: (item: T, index: number, original: List<T>) => boolean): LinkedList<T> {
+    const newInstance = new LinkedList<T>();
+  
+    this.forEach((item, index, original) => {
+      if (callback(item, index, original)) {
+        newInstance.push(item);
+      }
+    });
+  
+    return newInstance;
+  }
 }
 
 class Node<T> {
