@@ -1,11 +1,7 @@
-class DeclaredClass {}
-const ExpressedClass = class {}
-function declaredFunction() {}
-const expressedFunction = function () {};
-const arrowFunction = () => {};
+import {LinkedList} from './src/data-structure/list/LinkedList';
 
-console.log(DeclaredClass.name); // 'DeclaredClass'
-console.log(ExpressedClass.name); // 'ExpressedClass'
-console.log(declaredFunction.name); // 'declaredFunction'
-console.log(expressedFunction.name); // 'expressedFunction'
-console.log(arrowFunction.name); // 'arrowFunction'
+const list = new LinkedList<string>();
+list.push('123');
+list.push('123');
+list.push('123');
+console.log(list.toArray());
