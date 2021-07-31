@@ -38,4 +38,17 @@ export abstract class List<T> extends Collection<T> implements Iterable<T> {
   abstract findIndex(predicate: (value: T, index: number, original: List<T>) => boolean): number;
   abstract fill(value: T, fromIndex?: number, toIndex?: number): this;
   abstract get(index: number): T | undefined;
+  
+  /**
+   * The index parameter type for most Array methods is Optional.
+   * And it is implemented to enable negative numbers.
+   * So, I added it here so that the subclasses that extend this List class can calculate the negative index as a positive number.
+   *
+   * Also, I thought there was no reason to override this method in the subclass,
+   * so I tried to add the final keyword, but I didn't because TypeScript didn't support the final class member.
+   * https://github.com/microsoft/TypeScript/issues/8306
+   */
+  protected correctNegativeIndex(index = 0) {
+    return index >= 0 ? index : this.length + index;
+  };
 }

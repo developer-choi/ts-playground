@@ -73,8 +73,8 @@ export class LinkedList<T> extends List<T> {
    * How do we solve this code duplication?
    */
   slice(fromIndex = 0, toIndex = this.length): LinkedList<T> {
-    const _fromIndex = fromIndex >= 0 ? fromIndex : this.length + fromIndex;
-    const _toIndex = toIndex >= 0 ? toIndex : this.length + toIndex;
+    const _fromIndex = this.correctNegativeIndex(fromIndex);
+    const _toIndex = this.correctNegativeIndex(toIndex);
     const newInstance = new LinkedList<T>();
     
     if (_fromIndex > this.length || _toIndex < 0) {
@@ -91,9 +91,8 @@ export class LinkedList<T> extends List<T> {
   }
   
   fill(value: T, fromIndex = 0, toIndex = this.length): this {
-    //TODO These two lines have duplicate code with slice().
-    const _fromIndex = fromIndex >= 0 ? fromIndex : this.length + fromIndex;
-    const _toIndex = toIndex >= 0 ? toIndex : this.length + toIndex;
+    const _fromIndex = this.correctNegativeIndex(fromIndex);
+    const _toIndex = this.correctNegativeIndex(toIndex);
     
     let node = this.head;
     let index = 0;
