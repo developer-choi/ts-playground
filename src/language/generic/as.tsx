@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef, ElementType } from 'react';
 
 type SomeElementType = 'span' | 'div';
 
@@ -7,6 +7,38 @@ function MyAsComponent4<T extends SomeElementType>({ as, ...rest }: { as: T }) {
   const AsComponent = as ?? 'div';
   return (
     //@ts-ignore
+    <AsComponent {...rest}/>
+  );
+}
+
+/****************************************************************************************************
+ *
+ *****************************************************************************************************/
+
+type MyAsComponentProps1<T extends ElementType> = ComponentPropsWithoutRef<T> & { as?: T };
+
+/**
+ * 여기서 as가 any로 추론되는 이유를 도저히모르겠음.
+ */
+function MyAsComponent1<T extends ElementType>({as, ...rest}: MyAsComponentProps1<T>) {
+  const AsComponent = as;
+  return (
+    <AsComponent {...rest}/>
+  );
+}
+
+/****************************************************************************************************
+ *
+ *****************************************************************************************************/
+
+/**
+ * 이렇게 왜 Omit으로 감싸줘야 as가 잘 추론되는지도 이유를 모르겠음.
+ */
+type MyAsComponentProps2<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, 'as'> & { as?: T };
+
+function MyAsComponent2<T extends ElementType>({as, ...rest}: MyAsComponentProps2<T>) {
+  const AsComponent = as ?? 'div';
+  return (
     <AsComponent {...rest}/>
   );
 }
