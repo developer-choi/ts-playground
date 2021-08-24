@@ -42,3 +42,14 @@ function MyAsComponent2<T extends ElementType>({as, ...rest}: MyAsComponentProps
     <AsComponent {...rest}/>
   );
 }
+
+/****************************************************************************************************
+ *
+ *****************************************************************************************************/
+
+/**
+ * 이 타입에러도 원인을 모르겠다.
+ */
+function someFunction<T extends 'div' | 'span'>({as = 'div'}: { as?: T }) {
+  console.log(as);
+}
