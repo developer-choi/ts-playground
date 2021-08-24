@@ -5,7 +5,9 @@
     "strict": true,
     "noEmit": true,
     "moduleResolution": "Node",
-    "importsNotUsedAsValues": "error"
+    "importsNotUsedAsValues": "error",
+    "jsx": "react",
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"
