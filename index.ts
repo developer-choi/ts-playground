@@ -1,16 +1,26 @@
-import {LinkedList} from './src/data-structure/list/LinkedList';
+interface Device {
+  os: 'Android' | 'IOS';
+  name: string;
+  price: number;
+}
 
-const array = new LinkedList<number>();
-array.push(1);
-array.push(2);
-array.push(3);
-array.push(4);
-array.push(5);
-array.push(6);
-array.push(7);
-array.push(8);
-array.push(9);
-array.push(10);
+const devices: Device[] = [
+  {
+    os: 'Android',
+    name: 'Galaxy 22',
+    price: 1000000
+  },
+  {
+    os: 'IOS',
+    name: 'I Phone 11',
+    price: 2000000
+  },
+  {
+    os: 'IOS',
+    name: 'I Pad 5',
+    price: 3000000
+  }
+];
 
-console.log(array.findIndex(value => value === 2));
-console.log(array.get(2));
+console.log(devices.map(({price}) => price));
+console.log(devices.filter(({os}) => os === 'IOS'));
