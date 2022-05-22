@@ -4,23 +4,26 @@ interface Device {
   price: number;
 }
 
-const devices: Device[] = [
-  {
-    os: 'Android',
-    name: 'Galaxy 22',
-    price: 1000000
-  },
-  {
-    os: 'IOS',
-    name: 'I Phone 11',
-    price: 2000000
-  },
-  {
-    os: 'IOS',
-    name: 'I Pad 5',
-    price: 3000000
-  }
-];
+const Galaxy22: Device = {
+  os: 'Android',
+  name: 'Galaxy 22',
+  price: 1000000
+};
 
-console.log(devices.map(({price}) => price));
-console.log(devices.filter(({os}) => os === 'IOS'));
+const IPhone11: Device = {
+  os: 'IOS',
+  name: 'I Phone 11',
+  price: 2000000
+};
+
+const IPad5: Device = {
+  os: 'IOS',
+  name: 'I Pad 5',
+  price: 3000000
+};
+
+const devices: Device[] = [Galaxy22, IPhone11, IPad5];
+
+console.log(devices.includes(Galaxy22));
+console.log(devices.includes({...Galaxy22}));
+console.log(devices.find(({name}) => IPhone11.name));
