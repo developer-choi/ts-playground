@@ -23,9 +23,5 @@ const IPad5: Device = {
 };
 
 const devices: Device[] = [Galaxy22, IPhone11, IPad5];
-
-const sales = devices.reduce((a, b) => {
-  return a.concat({...b, price: b.price / 2});
-}, [] as Device[]);
-
-console.log(sales);
+console.log(devices.indexOf(IPad5));
+console.log(devices.indexOf({...IPad5}));
