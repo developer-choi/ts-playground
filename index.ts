@@ -22,6 +22,13 @@ const IPad5: Device = {
   price: 3000000
 };
 
-const devices: Device[] = [Galaxy22, IPhone11, IPad5];
-console.log(devices.indexOf(IPad5));
-console.log(devices.indexOf({...IPad5}));
+let devices: Device[] = [Galaxy22, IPhone11, IPad5];
+
+const prevDevices = devices;
+devices.push(Galaxy22);
+
+console.log(prevDevices === devices);
+
+devices = devices.concat(Galaxy22);
+
+console.log(prevDevices === devices);
